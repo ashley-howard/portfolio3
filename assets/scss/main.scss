@@ -16,8 +16,17 @@ sans-serif;
 
 $primary-colour: #A8D6F5;
 
+::selection {
+    background: $primary-colour;
+}
+
 body {
     font-family: $body-font;
+}
+
+svg {
+    fill: black;
+    transition: fill 0.5s;
 }
 
 a {
@@ -30,10 +39,17 @@ a {
     }
 }
 
+
+
 h1 {
     font-family: $primary-font;
-    font-size: 3em;
+    font-size: 4em;
     font-weight: 700;
+}
+
+p {
+    line-height: 35px;
+    font-size: 1.7em;
 }
 
 nav {
@@ -47,6 +63,7 @@ nav {
     justify-content: space-around;
     z-index: 1;
     background: white;
+
 
     a {
         text-transform: lowercase;
@@ -81,6 +98,15 @@ nav {
 #hero {
     display: flex;
     height: 100vh;
+    overflow: hidden;
+    position: relative;
+
+    .img-container {
+        position: absolute;
+        bottom: -2px;
+        right: 0;
+        // z-index: 2;
+    }
 
 
     .main-column {
@@ -90,57 +116,83 @@ nav {
         .bg {
             // position: absolute;
             // background: orange;
-            width: 80%;
+            width: 70%;
             height: 100%;
             position: absolute;
             right: 70px;
+            // right: 0;
             z-index: 0;
             background: linear-gradient(180deg, #A8D6F5, #fff);
+            animation: bg-top 0.5s ease forwards;
 
-            img {
-                position: absolute;
-                bottom: 0;
-                right: 0;
+            @keyframes bg-top {
+                from {
+                    transform: translateY(-100%);
+                }
+
+                to {
+                    transform: translateY(0);
+                }
             }
+
+            // img {
+            //     position: absolute;
+            //     bottom: 0;
+            //     right: 0;
+            // }
         }
 
         .content {
             top: 0;
             bottom: 0;
-            left: 5%;
+            left: 10%;
             position: absolute;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            // width: 700px;
 
-            width: 700px;
-
-            p {
-                font-size: 1.7em;
-                margin: 10px 0 30px 0;
+            h1 {
+                text-shadow: 4px -4px 0px #ffffff;
             }
 
+            p {
 
+                margin: 10px 0 50px 0;
+            }
         }
-
     }
 
-    .social-column {
-        background: white;
+    #social-column {
+        // background: white;
         // width: 3%;
         width: 70px;
+        height: 70%;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: space-evenly;
         z-index: 1;
+        // animation: social-column 0.5s ease forwards;
 
         svg {
             width: 20px;
             height: 20px;
+            // transform: skewY(7deg);
         }
     }
 }
+
+
+// @keyframes social-column {
+//     from {
+//         transform: translateX(100%);
+//     }
+
+//     to {
+//         transform: translateX(0);
+//     }
+// }
 
 .btns {
     a {
@@ -151,13 +203,19 @@ nav {
         margin-right: 5px;
         border-radius: 5px;
         border: 2px solid black;
+        transition: background-color 0.6s, color 0.6s;
 
         &.primary {
-            background: $primary-colour;
+            background-color: $primary-colour;
         }
 
         &.secondary {
-            background: transparent;
+            background-color: transparent;
+        }
+
+        &:hover {
+            background-color: darken($primary-colour, 20%);
+            color: white;
         }
     }
 }
